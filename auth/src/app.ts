@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(
   cookieSession({
     signed: false,
-    secure: true, //require https connection
+    secure: process.env.NODE_ENV !== "test", //if true, it require https connection
   })
 );
 
