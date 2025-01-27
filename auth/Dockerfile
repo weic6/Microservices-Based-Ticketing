@@ -5,4 +5,4 @@ COPY package.json .
 RUN npm install --omit=dev
 COPY . .
 
-CMD ["npm", "star
+CMD ["npm", "start"]
