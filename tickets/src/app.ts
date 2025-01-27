@@ -3,7 +3,7 @@ import "express-async-errors";
 // import { json } from "body-parser";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError } from "@wchentickets/common";
+import { errorHandler, NotFoundError, currentUser } from "@wchentickets/common";
 import { createTicketRouter } from "./routes/new";
 
 const app = express();
@@ -16,6 +16,7 @@ app.use(
     secure: process.env.NODE_ENV !== "test", //if true, it require https connection
   })
 );
+app.use(currentUser);
 
 app.use(createTicketRouter);
 
