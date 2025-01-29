@@ -32,7 +32,7 @@ router.post(
     // Find the ticket the user is trying to order in the database
     const ticket = await Ticket.findById(ticketId);
     if (!ticket) {
-      throw new Error("Ticket not found");
+      throw new NotFoundError();
     }
 
     // Make sure that this ticket is not already reserved
