@@ -1,7 +1,15 @@
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest } from "@wchentickets/common";
+import {
+  requireAuth,
+  validateRequest,
+  NotFoundError,
+  OrderStatus,
+  BadRequestError,
+} from "@wchentickets/common";
 import { body } from "express-validator";
+import { Ticket } from "../models/ticket";
+import { Order } from "../models/order";
 
 const router = express.Router();
 
@@ -17,6 +25,48 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
+    // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new Error("Ticket not found");
+    }
+
+    // Make sure that this ticket is not already reserved
+    // Run query to look at all orders. Find an order where the ticket
+    // is the ticket we just found *and* the orders status is *not* cancelled.
+    // If we find an order from that means the ticket *is* reserved
+    const existingOrder = await Order.findOne({
+      ticket: ticket,
+      status: {
+        $in: [
+          OrderStatus.Created,
+          OrderStatus.AwaitingPayment,
+          OrderStatus.Complete,
+        ],
+      },
+    });
+
+    if (existingOrder) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
+
+    // Calculate an expiration date for this order
+    const expiration = new Date();
+    expiration.setSeconds(expiration.getSeconds() + 15 * 60); // user has 15 minutes to pay
+
+    // Build the order and save it to the database
+    const order = Order.build({
+      userId: req.currentUser!.id,
+      status: "Created",
+      expiresAt: expiration,
+      ticket,
+    });
+    await order.save();
+
+    // Publish an event saying that an order was created
+
     res.send({});
   }
 );
