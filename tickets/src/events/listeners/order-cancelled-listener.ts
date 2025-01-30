@@ -4,7 +4,7 @@ import { Message } from "node-nats-streaming";
 import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
 
-export class OrderCancelledEvent extends Listener<OrderCancelledEvent> {
+export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
   readonly subject = Subjects.OrderCancelled;
   queueGroupName = queueGroupName;
 
