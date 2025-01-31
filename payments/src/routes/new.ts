@@ -4,7 +4,9 @@ import {
   requireAuth,
   validateRequest,
   BadRequestError,
+  NotAuthorizedError,
   NotFoundError,
+  OrderStatus,
 } from "@wchentickets/common";
 
 import { Order } from "../models/order";
@@ -29,10 +31,10 @@ router.post(
     }
 
     if (order.userId !== req.currentUser!.id) {
-      throw new BadRequestError("Unauthorized");
+      throw new NotAuthorizedError();
     }
 
-    if (order.status === "cancelled") {
+    if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError("Cannot pay for a cancelled order");
     }
 
