@@ -35,7 +35,8 @@ const OrderShow = ({ order, currentUser }) => {
 
   return (
     <div>
-      Time left to pay: {timeLeft} seconds
+      Time left to pay: {timeLeft} seconds.
+      <p> Test card: Visa 4242424242424242 Any 3 digits Any future date </p>
       <StripeCheckout
         token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51QnA3XGhs4ZcmEqisidjiDsCpPAZsHCm2SaxKeC1nthrHwV19yXPSPgq0rJZYPA17goGUwtBGLwEpIyOdz7Xco5r00n0RyX7Mg"
