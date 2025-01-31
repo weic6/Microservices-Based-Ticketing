@@ -37,10 +37,16 @@ it("return a 401 when purchasing an order that does not belong to the user", asy
 });
 
 it("return a 400 when purchasing a cancelled order", async () => {
-  const userId = "alskdfj";
-  const order = await global.createOrder(userId);
+  const userId = new mongoose.Types.ObjectId().toHexString();
 
-  order.set({ status: "cancelled" });
+  const order = await Order.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
+    userId,
+    version: 0,
+    price: 20,
+    status: OrderStatus.Cancelled,
+  });
+
   await order.save();
 
   await request(app)
