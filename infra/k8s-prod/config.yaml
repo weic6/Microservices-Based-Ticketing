@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  BASE_URL: "http://ticketing-abc.tech"
+  BASE_URL: "http://www.ticketing-abc.tech/"
