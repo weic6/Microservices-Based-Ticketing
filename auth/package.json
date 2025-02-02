@@ -23,7 +23,7 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.8",
     "@types/mongoose": "^5.11.97",
-    "@wchentickets/common": "^1.0.3",
+    "@wchentickets/common": "^1.0.12",
     "body-parser": "^1.20.3",
     "cookie-session": "^2.1.0",
     "express": "^4.21.2",

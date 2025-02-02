@@ -11,13 +11,15 @@ export default ({ currentUser }) => {
     .map(({ label, href }) => {
       return (
         <li key={href} className="nav-item">
-          <Link href={href}>{label}</Link>
+          <Link className="nav-link" href={href}>
+            {label}
+          </Link>
         </li>
       );
     });
   return (
     <nav className="navbar navbar-light bg-light">
-      <Link className="navbar-brand" href="/">
+      <Link className="navbar-brand ps-3" href="/">
         GitTix
       </Link>
       <div className="d-flex justify-content-end">

@@ -1,11 +1,12 @@
 import {
   Listener,
-  ExpirationCompleteEvent,
   Subjects,
+  ExpirationCompleteEvent,
+  OrderStatus,
 } from "@wchentickets/common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
-import { Order, OrderStatus } from "../../models/order";
+import { Order } from "../../models/order";
 import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
 
 export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent> {

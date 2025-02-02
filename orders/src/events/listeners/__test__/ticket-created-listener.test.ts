@@ -4,8 +4,6 @@ import { TicketCreatedEvent } from "@wchentickets/common";
 import { natsWrapper } from "../../../nats-wrapper";
 import mongoose from "mongoose";
 import { Ticket } from "../../../models/ticket";
-import request from "supertest";
-import { app } from "../../../app";
 
 const setup = async () => {
   // create an instance of the listener
