@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../app";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import path from "path";
 
 declare global {
   var signin: (id?: string) => string[];
@@ -10,8 +12,10 @@ declare global {
 
 jest.mock("../nats-wrapper");
 
-process.env.STRIPE_KEY =
-  "sk_test_51QnA3QK1UCqIPI0gWcFNdvITwEznC8dbitjh1dUc5dbFLclMMllAgmdKuyQ5aEV91NbnOfUlZAQhQUCAn8AjHn7u00SDQNSRwx";
+// Load the .env file only if not running in Kubernetes
+if (process.env.NODE_ENV !== "kubernetes") {
+  dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+}
 
 let mongo: any;
 beforeAll(async () => {

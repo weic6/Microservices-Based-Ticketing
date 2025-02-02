@@ -13,7 +13,7 @@ const setup = async () => {
     version: 0,
     expiresAt: "1sdfsd",
     status: OrderStatus.Created,
-    userId: "sdfc",
+    userId: "1dsdfs",
     ticket: {
       id: "1dsdfs",
       price: 10,
