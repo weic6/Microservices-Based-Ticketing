@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== "kubernetes") {
   dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 }
 
+console.log("Stripe Key: ", process.env.STRIPE_KEY);
+
 export const stripe = new Stripe(process.env.STRIPE_KEY!, {
   apiVersion: "2025-01-27.acacia",
 });
