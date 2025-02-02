@@ -42,6 +42,7 @@ const OrderShow = ({ order, currentUser }) => {
         amount={order.ticket.price * 100}
         email={currentUser.email}
       />
+      {/* stripeKey here is publishable key */}
       {errors}
     </div>
   );

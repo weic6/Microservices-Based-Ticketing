@@ -15,6 +15,20 @@ A scalable event-ticketing platform built with **microservices** to handle ticke
 
 - **Security & Integrations**: JWT/cookie-based auth with Kubernetes Secrets for secure token storage. Stripe API for payment; test workflows with mock credit cards.
 
+## How to use
+
+- clone this repo to local
+- create an `.env` file inside parent folder and add `STRIPE_KEY=[sk_test_...]`, whose value is a [Stripe secret key](https://dashboard.stripe.com/apikeys)
+- run ` kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=[sk_test_...]`, whose value is a [Stripe secret key](https://dashboard.stripe.com/apikeys).
+
+For testing each service: run `npm run test` inside `auth`, `client`, `payments`, `orders`, `tickets`.
+
+For development: Run `skaffold dev` inside parent folder, locally. Create a new branch such as `dev`, and modify the code and push the change to remote. After that, create a PR, it will trigger GitHub Actions to test all the services.
+
+For production: First purchase a domain name, deploy it on Digital Ocean (or other cloud provider). change the hostname inside yaml file.
+
 ## TODO
 
-- [ ] deployment
+- Deployment issue: After deploying to DigitalOcean, i always get, don't know how to solve it ヽ(｀ ⌒´)ノ. `AxiosError: Request failed with status code 503`
+
+![alt text](.image/image.png)
