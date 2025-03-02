@@ -4,6 +4,7 @@ import { app } from "./app";
 const start = async () => {
   console.log("Starting up............");
   if (!process.env.JWT_KEY) {
+    //process.env.JWT_KEY defined in k8s depl file auth-depl.yaml
     throw new Error("JWT_KEY must be defined");
   }
   if (!process.env.MONGO_URI) {

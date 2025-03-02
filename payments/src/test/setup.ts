@@ -14,8 +14,8 @@ jest.mock("../nats-wrapper");
 
 // Load the .env file only if not running in Kubernetes
 if (process.env.NODE_ENV !== "production") {
-  dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
-}
+  dotenv.config({ path: path.resolve(__dirname, "../../../.env") }); // load env variables from .env file
+} //dotenv populates process.env with values from your .env file.
 
 let mongo: any;
 beforeAll(async () => {
