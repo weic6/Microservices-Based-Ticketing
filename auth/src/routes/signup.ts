@@ -10,14 +10,16 @@ const router = express.Router();
 router.post(
   "/api/users/signup",
   [
+    // Validation middleware array
     body("email").isEmail().withMessage("Email must be valid"),
     body("password")
       .trim()
       .isLength({ min: 4, max: 20 })
       .withMessage("Password must be between 4 and 20 characters"),
   ],
-  validateRequest,
+  validateRequest, // Validation processor middleware
   async (req: Request, res: Response) => {
+    // Route handler function
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -38,6 +40,7 @@ router.post(
     );
 
     // store it in session object
+    // req.session.jwt = userJwt; // in typescript this does not work. instead we create a new object and assign it to req.session
     req.session = {
       jwt: userJwt,
     };
