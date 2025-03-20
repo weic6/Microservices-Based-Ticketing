@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(
   cookieSession({
     signed: false,
-    // secure: process.env.NODE_ENV !== "test", //if true, it require https connection
-    secure: false,
+    secure: process.env.NODE_ENV !== "test", // if `secure: true`, only send the cookie over HTTPS connections
+    // secure: false, // for testing
   })
 );
 app.use(currentUser);

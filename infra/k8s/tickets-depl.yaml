@@ -26,6 +26,8 @@ spec:
               value: ticketing
             - name: MONGO_URI
               value: "mongodb://tickets-mongo-srv:27017/tickets"
+            - name: NODE_ENV
+              value: "development"
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

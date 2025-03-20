@@ -22,6 +22,8 @@ spec:
                   fieldPath: metadata.name
             - name: NATS_URL
               value: "http://nats-srv:4222"
+            - name: NODE_ENV
+              value: "development"
             - name: NATS_CLUSTER_ID
               value: ticketing
             - name: MONGO_URI
