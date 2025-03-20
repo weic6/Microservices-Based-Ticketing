@@ -19,6 +19,7 @@ A scalable event-ticketing platform built with **microservices** to handle ticke
 
 - clone this repo to local
 - create an `.env` file inside parent folder and add `STRIPE_KEY=[sk_test_...]`, whose value is a [Stripe secret key](https://dashboard.stripe.com/apikeys)
+- run `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=[your_jwt_key]`, where your_jwt_key is user defined key. This enables `process.env.JWT_KEY` in the signup/signin route to sign JWT.
 - run ` kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=[sk_test_...]`, whose value is a [Stripe secret key](https://dashboard.stripe.com/apikeys).
 
 For testing each service: run `npm run test` inside `auth`, `client`, `payments`, `orders`, `tickets`.
